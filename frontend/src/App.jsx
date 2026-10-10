@@ -165,25 +165,11 @@ function PlayIcon() {
 
 function Logo() {
   return (
-    <a href="#home" className="brand" aria-label="CinemaMatch AI home">
-      <span className="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 48 48" fill="none">
-          <defs>
-            <linearGradient id="cinemamatch-logo-gradient" x1="5" y1="4" x2="43" y2="44" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#C4B5FD" />
-              <stop offset="1" stopColor="#7C3AED" />
-            </linearGradient>
-          </defs>
-          <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#cinemamatch-logo-gradient)" />
-          <path d="M19 13.5C19 12.3 20.3 11.6 21.3 12.2L34 20.1C35 20.7 35 22.1 34 22.7L21.3 30.6C20.3 31.2 19 30.5 19 29.3V13.5Z" fill="#100B1D" />
-          <path d="M11 17.5V30.5M8 20.5H14M8 27.5H14" stroke="white" strokeWidth="2" strokeLinecap="round" opacity=".9" />
-        </svg>
-      </span>
-      <span className="brand-copy">
-        <span className="brand-title">CinemaMatch <span>AI</span></span>
-        <span className="brand-tagline">YOUR NEXT FAVORITE FILM</span>
-      </span>
-    </a>
+    <img
+      src="/images/cinematch-logo.png"
+      alt="CinemaMatch AI"
+      className="brand-logo"
+    />
   );
 }
 

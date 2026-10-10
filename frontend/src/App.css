@@ -1782,3 +1782,32 @@ body:has(.modal-backdrop) {
     height: 54px;
   }
 }
+
+/* CinemaMatch AI — custom PNG logo */
+
+.brand-logo {
+
+  display: block;
+
+  width: 220px;
+
+  max-width: 100%;
+
+  height: auto;
+
+  object-fit: contain;
+
+}
+
+/* Keep the logo responsive on smaller screens */
+
+@media (max-width: 600px) {
+
+  .brand-logo {
+
+    width: 175px;
+
+  }
+
+}cd /Users/atulmalpe/Desktop/cinematch-ai/frontend
+
