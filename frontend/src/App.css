@@ -1810,3 +1810,11 @@ body:has(.modal-backdrop) {
   }
 
 }
+
+.brand-home-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -163,13 +163,23 @@ function PlayIcon() {
   );
 }
 
-function Logo() {
+function Logo({ onClick }) {
   return (
-    <img
-      src="/images/cinematch-logo.png"
-      alt="CinemaMatch AI"
-      className="brand-logo"
-    />
+    <a
+      href="#home"
+      className="brand-home-link"
+      aria-label="CinemaMatch AI home"
+      onClick={(event) => {
+        event.preventDefault();
+        onClick?.();
+      }}
+    >
+      <img
+        src="/images/cinematch-logo.png"
+        alt="CinemaMatch AI"
+        className="brand-logo"
+      />
+    </a>
   );
 }
 
@@ -539,7 +549,9 @@ function App() {
   const [genreMovies, setGenreMovies] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(
+    () => new URLSearchParams(window.location.search).get("q") || "",
+  );
   const [activeGenre, setActiveGenre] = useState("All");
   const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -552,6 +564,56 @@ function App() {
   const [topError, setTopError] = useState("");
   const [genreError, setGenreError] = useState("");
   const [searchError, setSearchError] = useState("");
+
+  const handleSearchChange = useCallback((value) => {
+    const nextSearch = value;
+    const currentSearch = new URLSearchParams(window.location.search).get("q") || "";
+    const nextUrl = new URL(window.location.href);
+
+    if (!currentSearch && nextSearch.trim()) {
+      nextUrl.searchParams.set("q", nextSearch);
+      nextUrl.hash = "";
+      window.history.pushState({ cinemaMatchSearch: true }, "", nextUrl);
+    } else if (currentSearch && nextSearch.trim()) {
+      nextUrl.searchParams.set("q", nextSearch);
+      nextUrl.hash = "";
+      window.history.replaceState({ cinemaMatchSearch: true }, "", nextUrl);
+    } else if (!nextSearch.trim() && currentSearch) {
+      nextUrl.searchParams.delete("q");
+      nextUrl.hash = "home";
+      window.history.pushState({ cinemaMatchHome: true }, "", nextUrl);
+    }
+
+    setSearch(nextSearch);
+  }, []);
+
+  const navigateHome = useCallback(() => {
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.delete("q");
+    nextUrl.hash = "home";
+
+    if (new URLSearchParams(window.location.search).has("q")) {
+      window.history.pushState({ cinemaMatchHome: true }, "", nextUrl);
+    } else {
+      window.history.pushState({ cinemaMatchHome: true }, "", nextUrl);
+    }
+
+    setSearch("");
+    setSelectedMovie(null);
+    setActiveGenre("All");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    function handlePopState() {
+      const params = new URLSearchParams(window.location.search);
+      setSearch(params.get("q") || "");
+      setSelectedMovie(null);
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const loadHome = useCallback(async () => {
     const controller = new AbortController();
@@ -697,7 +759,7 @@ function App() {
   return (
     <div className="app-shell" id="home">
       <header className="topbar">
-        <Logo />
+        <Logo onClick={navigateHome} />
 
         <nav className="main-nav" aria-label="Main navigation">
           <a className="nav-link nav-link-active" href="#home">
@@ -718,7 +780,7 @@ function App() {
             type="search"
             placeholder="Search movies, genres..."
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => handleSearchChange(event.target.value)}
             aria-label="Search movies"
           />
 
@@ -943,7 +1005,7 @@ function App() {
               />
 
               <footer className="site-footer">
-                <Logo />
+                <Logo onClick={navigateHome} />
 
                 <p>
                   Discover stories you'll love. Built with curiosity
