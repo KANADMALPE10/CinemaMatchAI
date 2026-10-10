@@ -267,3 +267,33 @@ Electronics and Telecommunication Engineering student interested in Machine Lear
 ---
 
 *CinemaMatch AI — Find your next favorite film.*
+
+## 📸 Application Screenshots
+
+### Homepage
+
+![CinemaMatch AI Homepage](screenshots/Homepage.png)
+
+### Movie Search
+
+![CinemaMatch AI Movie Search](screenshots/Search.png)
+
+### Movie Recommendations
+
+![CinemaMatch AI Recommendations](screenshots/Recommendations.png)
+
+### Additional Recommendations
+
+![Additional Movie Recommendations](screenshots/Recommendations%202.png)
+
+### Trending Movies
+
+![CinemaMatch AI Trending Movies](screenshots/Trending.png)
+
+### Top-Rated Movies
+
+![CinemaMatch AI Top Rated Movies](screenshots/Top%20Rated.png)
+
+### Explore More
+
+![Explore More Movies](screenshots/Explore_more.png)
