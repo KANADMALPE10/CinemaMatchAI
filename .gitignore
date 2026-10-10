@@ -1,0 +1,39 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# macOS files
+.DS_Store
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+frontend_backup/
+
+# Raw datasets and rating datasets
+data/raw/
+data/ratings/
+
+# Keep only the runtime catalog
+data/processed/*
+!data/processed/catalog_cleaned.csv
+
+# Keep only the models required by the current recommender
+models/*
+!models/tfidf_matrix.joblib
+!models/movie_metadata.joblib
+
+# Logs
+*.log
